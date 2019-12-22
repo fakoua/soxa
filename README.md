@@ -8,7 +8,7 @@ Deno example:
 Create file example.ts
 
 ```
-import { soxa } from 'https://raw.githubusercontent.com/fakoua/soxa/master/mod.ts'
+import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 
 
 //Promise
