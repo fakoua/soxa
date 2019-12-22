@@ -1,4 +1,4 @@
-import { soxa } from './src/soxa.js'
+import { soxa } from './mod.ts'
 
 soxa.get('http://localhost:3000/', {
     data: {
