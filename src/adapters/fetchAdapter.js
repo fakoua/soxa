@@ -23,12 +23,21 @@ const fetchAdapter = function (config) {
   
       let fullPath = buildFullPath(config.baseURL, config.url);
 
+      console.log(config.auth)
+
       let parsed = new URL(fullPath);
       let protocol = parsed.protocol || 'http:'
 
       let path = buildURL(parsed.pathname, config.params, config.paramsSerializer).replace(/^\?/, '')
 
-      fetch(fullPath)
+  
+      let options = {
+        method: config.method.toUpperCase(),
+        body: config.data,
+        headers: config.headers,
+      };
+      options.headers['Authorization'] ='Basic c2FtbzpzYW1v'
+      fetch(fullPath, options)
         .then((res => {
           //console.log(res.ok) //true false
           let headers = {}
