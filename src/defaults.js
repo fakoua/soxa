@@ -15,16 +15,6 @@ function setContentTypeIfUnset(headers, value) {
 }
 
 function getDefaultAdapter() {
-  // var adapter;
-  // if (typeof XMLHttpRequest !== 'undefined') {
-  //   // For browsers use XHR adapter
-  //   adapter = require('./adapters/xhr');
-  // } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-  //   // For node use HTTP adapter
-  //   adapter = require('./adapters/http');
-  // }
-  // return adapter;
- 
   return fetchAdapter;
 }
 
@@ -89,12 +79,11 @@ defaults.headers = {
   }
 };
 
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
+defaults.headers.delete = {};
+defaults.headers.get = {};
+defaults.headers.head = {};
+defaults.headers.post = utils.merge(DEFAULT_CONTENT_TYPE);
+defaults.headers.put = utils.merge(DEFAULT_CONTENT_TYPE);
+defaults.headers.patch = utils.merge(DEFAULT_CONTENT_TYPE);
 
 export { defaults }
