@@ -1,2 +1,1 @@
-import { soxa } from './src/soxa.js'
-export { soxa }
+export { soxa } from "./src/soxa.js"
