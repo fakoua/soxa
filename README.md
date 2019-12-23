@@ -1,5 +1,5 @@
 # soxa
-[![][tci badge]][tci link]
+[![Build Status](https://api.travis-ci.com/fakoua/soxa.svg?branch=master)](https://travis-ci.com/fakoua/soxa)
 Promise based HTTP client for deno
 
 ## Features
