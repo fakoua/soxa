@@ -1,4 +1,7 @@
 import { soxa } from './mod.ts'
+import { foo } from "./fake_mod.ts"
+
+foo()
 
 
 //Promise
