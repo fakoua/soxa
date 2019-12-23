@@ -6,6 +6,7 @@ import "./src/helpers/buildURL_test.ts"
 import "./src/helpers/combineURLs_test.ts"
 import "./src/helpers/isAbsoluteURL_test.ts"
 import "./src/helpers/normalizeHeaderName_test.ts"
+import "./examples_test.ts"
 
 import { runTests } from "./test_deps.ts"
 

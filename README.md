@@ -81,60 +81,6 @@ soxa.post('/user', {
   });
 ```
 
-Performing multiple concurrent requests
-
-```js
-function getUserAccount() {
-  return soxa.get('/user/12345');
-}
-
-function getUserPermissions() {
-  return soxa.get('/user/12345/permissions');
-}
-
-soxa.all([getUserAccount(), getUserPermissions()])
-  .then(soxa.spread(function (acct, perms) {
-    // Both requests are now complete
-  }));
-```
-
-## soxa API
-
-Requests can be made by passing the relevant config to `soxa`.
-
-##### soxa(config)
-
-```js
-// Send a POST request
-soxa({
-  method: 'post',
-  url: '/user/12345',
-  data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  }
-});
-```
-
-```js
-// GET request for remote image
-soxa({
-  method: 'get',
-  url: 'http://bit.ly/2mTM3nY',
-  responseType: 'stream'
-})
-  .then(function (response) {
-    response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-  });
-```
-
-##### soxa(url[, config])
-
-```js
-// Send a GET request (default method)
-soxa('/user/12345');
-```
-
 ### Request method aliases
 
 For convenience aliases have been provided for all supported request methods.
@@ -158,33 +104,6 @@ Helper functions for dealing with concurrent requests.
 ##### soxa.all(iterable)
 ##### soxa.spread(callback)
 
-### Creating an instance
-
-You can create a new instance of soxa with a custom config.
-
-##### soxa.create([config])
-
-```js
-const instance = soxa.create({
-  baseURL: 'https://some-domain.com/api/',
-  timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
-});
-```
-
-### Instance methods
-
-The available instance methods are listed below. The specified config will be merged with the instance config.
-
-##### soxa#request(config)
-##### soxa#get(url[, config])
-##### soxa#delete(url[, config])
-##### soxa#head(url[, config])
-##### soxa#options(url[, config])
-##### soxa#post(url[, data[, config]])
-##### soxa#put(url[, data[, config]])
-##### soxa#patch(url[, data[, config]])
-##### soxa#getUri([config])
 
 ## Request Config
 
@@ -408,37 +327,6 @@ You can specify config defaults that will be applied to every request.
 soxa.defaults.baseURL = 'https://api.example.com';
 soxa.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 soxa.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-```
-
-### Custom instance defaults
-
-```js
-// Set config defaults when creating the instance
-const instance = soxa.create({
-  baseURL: 'https://api.example.com'
-});
-
-// Alter defaults after instance has been created
-instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-```
-
-### Config order of precedence
-
-Config will be merged with an order of precedence. The order is library defaults found in [lib/defaults.js](https://github.com/soxa/soxa/blob/master/lib/defaults.js#L28), then `defaults` property of the instance, and finally `config` argument for the request. The latter will take precedence over the former. Here's an example.
-
-```js
-// Create an instance using the config defaults provided by the library
-// At this point the timeout config value is `0` as is the default for the library
-const instance = soxa.create();
-
-// Override timeout default for the library
-// Now all requests using this instance will wait 2.5 seconds before timing out
-instance.defaults.timeout = 2500;
-
-// Override timeout for this request as it's known to take a long time
-instance.get('/longRequest', {
-  timeout: 5000
-});
 ```
 
 ## Interceptors
