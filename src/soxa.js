@@ -5,6 +5,11 @@ import { bind } from './helpers/bind.js'
 import { Soxa } from './core/Soxa.js'
 import { mergeConfig } from './core/mergeConfig.js'
 import { defaults } from './defaults.js'
+import { Cancel as tempCancel } from './cancel/Cancel.js'
+import { CancelToken as tempCancelTopen } from './cancel/CancelToken.js'
+import { isCancel as tempIsCancel } from './cancel/isCancel.js'
+import { spread as tempSpread } from './helpers/spread.js'
+
 
 /**
  * Create an instance of Soxa
@@ -37,13 +42,8 @@ soxa.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-import { Cancel as tempCancel } from './cancel/Cancel.js'
 soxa.Cancel = tempCancel
-
-import { CancelToken as tempCancelTopen } from './cancel/CancelToken.js'
 soxa.CancelToken = tempCancelTopen
-
-import { isCancel as tempIsCancel } from './cancel/isCancel.js'
 soxa.isCancel = tempIsCancel
 
 // Expose all/spread
@@ -51,7 +51,6 @@ soxa.all = function all(promises) {
   return Promise.all(promises);
 };
 
-import { spread as tempSpread } from './helpers/spread.js'
 soxa.spread = tempSpread
 
 export { soxa }

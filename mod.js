@@ -1,8 +1,4 @@
 import { soxa } from './mod.ts'
-import { foo } from "./fake_mod.ts"
-
-foo()
-
 
 //Promise
 soxa.get('https://jsonplaceholder.typicode.com/todos/1')
