@@ -1,5 +1,5 @@
 # soxa
-
+[![][tci badge]][tci link]
 Promise based HTTP client for deno
 
 ## Features
