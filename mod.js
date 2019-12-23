@@ -1,19 +1,16 @@
 import { soxa } from './mod.ts'
 
-soxa.get('http://localhost:3000/', {
-    data: {
-        title: 'hello', 
-        body: 'bodo',
-        userId: 4
-     }, 
-     auth: {
-         username: 'samo',
-         password: 'samo'
-     }
-})
+
+//Promise
+soxa.get('https://jsonplaceholder.typicode.com/todos/1')
 .then((res)=> {
     console.log(res.data)
 })
 .catch((err) => {
-    console.log(`---------------------${err}`)
+    console.log(`${err}`)
 })
+
+//Await
+
+let response = await soxa.get('https://jsonplaceholder.typicode.com/comments');
+console.log(response.data)

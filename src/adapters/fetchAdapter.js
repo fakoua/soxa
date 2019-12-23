@@ -23,14 +23,11 @@ const fetchAdapter = function (config) {
   
       let fullPath = buildFullPath(config.baseURL, config.url);
 
-      console.log(config.auth)
-
       let parsed = new URL(fullPath);
       let protocol = parsed.protocol || 'http:'
 
       let path = buildURL(parsed.pathname, config.params, config.paramsSerializer).replace(/^\?/, '')
-
-  
+ 
       let options = {
         method: config.method.toUpperCase(),
         body: config.data,
