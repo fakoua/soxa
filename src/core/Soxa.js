@@ -69,26 +69,56 @@ Soxa.prototype.getUri = function getUri(config) {
   return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
 };
 
-// Provide aliases for supported request methods
-utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
-  /*eslint func-names:0*/
-  Soxa.prototype[method] = function(url, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url
-    }));
-  };
-});
+Soxa.prototype.delete = function(url, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'delete',
+    url: url
+  }));
+};
 
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  /*eslint func-names:0*/
-  Soxa.prototype[method] = function(url, data, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url,
-      data: data
-    }));
-  };
-});
+Soxa.prototype.get = function(url, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'get',
+    url: url
+  }));
+};
+
+Soxa.prototype.head = function(url, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'head',
+    url: url
+  }));
+};
+
+Soxa.prototype.options = function(url, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'options',
+    url: url
+  }));
+};
+
+Soxa.prototype.post = function(url, data, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'post',
+    url: url,
+    data: data
+  }));
+};
+
+Soxa.prototype.put = function(url, data, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'put',
+    url: url,
+    data: data
+  }));
+};
+
+Soxa.prototype.patch = function(url, data, config) {
+  return this.request(utils.merge(config || {}, {
+    method: 'patch',
+    url: url,
+    data: data
+  }));
+};
 
 export { Soxa }
