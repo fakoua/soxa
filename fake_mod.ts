@@ -1,1 +1,1 @@
-export { foo } from "./src/fake.ts"
+export { foo } from "./src/fake.js"
