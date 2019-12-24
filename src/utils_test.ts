@@ -1,4 +1,4 @@
-import * as utils from './utils.js'
+import * as utils from './utils.ts'
 import { test, assert } from '../test_deps.ts'
 
 test(function test_utils_IsArray() {

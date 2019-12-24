@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 
 /**
  * Config-specific merge-function which creates a new config-object

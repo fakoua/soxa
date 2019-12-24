@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 
 function encode(val: string) : string {
   return encodeURIComponent(val).

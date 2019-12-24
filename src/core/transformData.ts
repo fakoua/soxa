@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 
 /**
  * Transform the data for a request or a response

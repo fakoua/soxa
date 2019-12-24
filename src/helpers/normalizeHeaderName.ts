@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 
 const normalizeHeaderName = function (headers: object, normalizedName: string): void {
   utils.forEach(headers, function processHeader(value: string, name: string): void {

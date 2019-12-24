@@ -1,6 +1,6 @@
-import * as utils from './utils.js'
+import * as utils from './utils.ts'
 import { normalizeHeaderName } from './helpers/normalizeHeaderName.ts'
-import { fetchAdapter } from './adapters/fetchAdapter.js'
+import { fetchAdapter } from './adapters/fetchAdapter.ts'
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'

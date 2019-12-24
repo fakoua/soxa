@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 import { buildURL } from '../helpers/buildURL.ts'
 import { InterceptorManager } from './InterceptorManager.ts'
 import { dispatchRequest } from './dispatchRequest.ts'

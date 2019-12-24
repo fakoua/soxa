@@ -1,9 +1,3 @@
-'use strict';
-
-import { bind } from './helpers/bind.js'
-
-/*global toString:true*/
-
 // utils is a library of generic helper functions non-specific to soxa
 
 var toString = Object.prototype.toString;
@@ -73,26 +67,6 @@ function isArrayBufferView(val) {
     result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
   }
   return result;
-}
-
-/**
- * Determine if a value is a String
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a String, otherwise false
- */
-function isString(val) {
-  return typeof val === 'string';
-}
-
-/**
- * Determine if a value is a Number
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Number, otherwise false
- */
-function isNumber(val) {
-  return typeof val === 'number';
 }
 
 /**
@@ -166,16 +140,6 @@ function isURLSearchParams(val) {
 }
 
 /**
- * Trim excess whitespace off the beginning and end of a string
- *
- * @param {String} str The String to trim
- * @returns {String} The String freed of excess whitespace
- */
-function trim(str) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '');
-}
-
-/**
  * Iterate over an Array or an Object invoking a function for each item.
  *
  * If `obj` is an Array callback will be called passing
@@ -231,7 +195,7 @@ function forEach(obj, fn) {
  * @param {Object} obj1 Object to merge
  * @returns {Object} Result of all merge properties
  */
-function merge(/* obj1, obj2, obj3, ... */) {
+function merge(...args: any[]) {
   var result = {};
   function assignValue(val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
@@ -255,7 +219,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
  * @param {Object} obj1 Object to merge
  * @returns {Object} Result of all merge properties
  */
-function deepMerge(/* obj1, obj2, obj3, ... */) {
+function deepMerge(...args: any[]) {
   var result = {};
   function assignValue(val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
@@ -273,44 +237,20 @@ function deepMerge(/* obj1, obj2, obj3, ... */) {
   return result;
 }
 
-/**
- * Extends object a by mutably adding to it the properties of object b.
- *
- * @param {Object} a The object to be extended
- * @param {Object} b The object to copy properties from
- * @param {Object} thisArg The object to bind function to
- * @return {Object} The resulting value of object a
- */
-function extend(a, b, thisArg) {
-  forEach(b, function assignValue(val, key) {
-    if (thisArg && typeof val === 'function') {
-      a[key] = bind(val, thisArg);
-    } else {
-      a[key] = val;
-    }
-  });
-  return a;
-}
-
 export  {
   isArray,
   isArrayBuffer,
   isBuffer,
   isFormData,
   isArrayBufferView,
-  isString,
-  isNumber,
   isObject,
   isUndefined,
   isDate,
   isFile,
   isBlob,
-  isFunction,
   isStream,
   isURLSearchParams,
   forEach,
   merge,
-  deepMerge,
-  extend,
-  trim
+  deepMerge
 };

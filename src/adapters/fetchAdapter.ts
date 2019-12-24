@@ -1,7 +1,8 @@
 import { settle } from '../core/settle.ts'
 import { buildURL } from '../helpers/buildURL.ts'
 import { buildFullPath } from '../core/buildFullPath.ts'
-const fetchAdapter = function (config) {
+
+const fetchAdapter = function (config): Promise<any> {
     // At this point:
     //  - config has been merged with defaults
     //  - request transformers have already run
@@ -11,20 +12,11 @@ const fetchAdapter = function (config) {
     // Upon response settle the Promise
   
     return new Promise(function(resolve, reject) {
-    
-      // var response = {
-      //   data: responseData,
-      //   status: request.status,
-      //   statusText: request.statusText,
-      //   headers: responseHeaders,
-      //   config: config,
-      //   request: request
-      // };
   
       let fullPath = buildFullPath(config.baseURL, config.url);
 
       let parsed = new URL(fullPath);
-      let protocol = parsed.protocol || 'http:'
+      //let protocol = parsed.protocol || 'http:'
       let path = buildURL(parsed.href, config.params, config.paramsSerializer).replace(/^\?/, '')
 
       let headers = config.headers;

@@ -1,6 +1,6 @@
 'use strict';
 
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 import { transformData } from './transformData.ts'
 import { isCancel } from '../cancel/isCancel.ts'
 import { defaults } from '../defaults.ts'

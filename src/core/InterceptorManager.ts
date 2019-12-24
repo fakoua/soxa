@@ -1,4 +1,4 @@
-import * as utils from '../utils.js'
+import * as utils from '../utils.ts'
 export class InterceptorManager {
     handlers: Array<object>
     constructor() {
