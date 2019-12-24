@@ -25,22 +25,36 @@ const fetchAdapter = function (config) {
 
       let parsed = new URL(fullPath);
       let protocol = parsed.protocol || 'http:'
+      let path = buildURL(parsed.href, config.params, config.paramsSerializer).replace(/^\?/, '')
 
-      let path = buildURL(parsed.pathname, config.params, config.paramsSerializer).replace(/^\?/, '')
- 
+      let headers = config.headers;
+
+      // HTTP basic authentication
+      var auth = undefined;
+      if (config.auth) {
+        var username = config.auth.username || '';
+        var password = config.auth.password || '';
+        auth = username + ':' + password;
+      }
+
+      if (auth) {
+        delete headers.Authorization;
+      }
+      
       let options = {
         method: config.method.toUpperCase(),
         body: config.data,
-        headers: config.headers,
+        headers: headers,
       };
-      options.headers['Authorization'] ='Basic c2FtbzpzYW1v'
-      fetch(fullPath, options)
+      if (auth) {
+        options.headers['Authorization'] =`Basic ${btoa(auth)}`
+      }
+      
+      fetch(path, options)
         .then((res => {
-          //console.log(res.ok) //true false
-          let headers = {}
+          let h = {}
           for (let [key, value] of res.headers) {
-            //console.log(`${key} = ${value}`);
-            headers[key] = value
+            h[key] = value
           }
 
           res.text()  
@@ -49,7 +63,7 @@ const fetchAdapter = function (config) {
               data: data,
               status: res.status,
               statusText: res.statusText,
-              headers: headers,
+              headers: h,
               config: config,
               request: ''
             }

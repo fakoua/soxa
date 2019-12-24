@@ -1,5 +1,7 @@
 # soxa
+
 [![Build Status](https://api.travis-ci.com/fakoua/soxa.svg?branch=master)](https://travis-ci.com/fakoua/soxa)
+
 Promise based HTTP client for deno
 
 ## Features
@@ -16,16 +18,27 @@ Promise based HTTP client for deno
 Using deno:
 
 ```js
-import { soxa } from 'https://raw.githubusercontent.com/fakoua/soxa/master/mod.ts'
+import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 ```
+
 ## Example
 
-Performing a `GET` request
+Performing a `GET` request (Promise)
 
 ```js
-import { soxa } from 'https://raw.githubusercontent.com/fakoua/soxa/master/mod.ts'
+import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 
-// Make a request for a user with a given ID
+// soxa.get(url, config)
+// soxa.head(url, config)
+// soxa.delete(url, config)
+
+// soxa.post(url, data, config)
+// soxa.put(url, data, config)
+// soxa.patch(url, data, config)
+
+
+//Example
+// Make a request for todos
 soxa.get('https://jsonplaceholder.typicode.com/todos/1')
   .then(function (response) {
     // handle success
@@ -38,85 +51,59 @@ soxa.get('https://jsonplaceholder.typicode.com/todos/1')
   .finally(function () {
     // always executed
   });
+```
 
-// Optionally the request above could also be done as
-soxa.get('https://jsonplaceholder.typicode.com/todos/1', {
-    params: {
-      ID: 12345
-    }
-  })
-  .then(function (response) {
-    console.log(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-  .finally(function () {
-    // always executed
-  });  
+Performing a `GET` request (Await/Async)
 
-// Want to use async/await? Add the `async` keyword to your outer function/method.
-async function getUser() {
-  try {
-    const response = await soxa.get('https://jsonplaceholder.typicode.com/todos/1');
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
+```js
+let result = await soxa.get('https://jsonplaceholder.typicode.com/todos/1');
+console.log(result.data)
 ```
 
 Performing a `POST` request
 
 ```js
-soxa.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+let response = await soxa.post('https://jsonplaceholder.typicode.com/posts', {
+                          "title": "Hello Soxa",
+                          "id": 14
+                      });
+//Note: data is passed with valid JSON format ( {"key": "string-value", "key2": int-value ...} )
+
+//OR you can send the data with the config object.
+let response = await soxa.post('https://jsonplaceholder.typicode.com/posts', {}, {
+    headers: {'x-user': 'fakoua'},
+    data: {
+        "title":"Hello Soxa",
+        "id":14
+    }
+});
 ```
 
-### Request method aliases
+## URL Examples
 
-For convenience aliases have been provided for all supported request methods.
+```js
+await soxa.get('http://example.com'); // http://example.com
+await soxa.get('http://example.com', { params: { q: 'hello' } }); // http://example.com?q=hello
+await soxa.get('http://example.com', { params: { q: 'hello', id: 12 } }); // http://example.com?q=hello&id=12
 
-##### soxa.request(config)
-##### soxa.get(url[, config])
-##### soxa.delete(url[, config])
-##### soxa.head(url[, config])
-##### soxa.options(url[, config])
-##### soxa.post(url[, data[, config]])
-##### soxa.put(url[, data[, config]])
-##### soxa.patch(url[, data[, config]])
+await soxa.get('http://example.com/folder', { params: { q: 'hello' } }); // http://example.com/folder?q=hello
 
-###### NOTE
-When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
+//Note: if baseURL is set in the config, you only need to pass the /folder relative path.
+let config = {
+  baseURL: 'http://example.com/',
+  params: {
+            q: 'hello'
+          }
+ }
+await soxa.get('/folder', config); // http://example.com/folder?q=hello
+```
 
-### Concurrency
-
-Helper functions for dealing with concurrent requests.
-
-##### soxa.all(iterable)
-##### soxa.spread(callback)
-
-
-## Request Config
+## Config
 
 These are the available config options for making requests. Only the `url` is required. Requests will default to `GET` if `method` is not specified.
 
 ```js
 {
-  // `url` is the server URL that will be used for the request
-  url: '/user',
-
-  // `method` is the request method to be used when making the request
-  method: 'get', // default
-
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of soxa to pass relative URLs
   // to methods of that instance.
@@ -146,22 +133,22 @@ These are the available config options for making requests. Only the `url` is re
 
   // `params` are the URL parameters to be sent with the request
   // Must be a plain object or a URLSearchParams object
+  // Result:  [url]/?ID=12345
   params: {
     ID: 12345
   },
 
   // `paramsSerializer` is an optional function in charge of serializing `params`
-  // (e.g. https://www.npmjs.com/package/qs, http://api.jquery.com/jquery.param/)
+  // (e.g. http://api.jquery.com/jquery.param/)
   paramsSerializer: function (params) {
-    return Qs.stringify(params, {arrayFormat: 'brackets'})
+    return ...
   },
 
   // `data` is the data to be sent as the request body
   // Only applicable for request methods 'PUT', 'POST', and 'PATCH'
   // When no `transformRequest` is set, must be of one of the following types:
   // - string, plain object, ArrayBuffer, ArrayBufferView, URLSearchParams
-  // - Browser only: FormData, File, Blob
-  // - Node only: Stream, Buffer
+  // Browser only: FormData, File, Blob
   data: {
     firstName: 'Fred'
   },
@@ -179,21 +166,15 @@ These are the available config options for making requests. Only the `url` is re
   // should be made using credentials
   withCredentials: false, // default
 
-  // `adapter` allows custom handling of requests which makes testing easier.
-  // Return a promise and supply a valid response (see lib/adapters/README.md).
-  adapter: function (config) {
-    /* ... */
-  },
-
   // `auth` indicates that HTTP Basic auth should be used, and supplies credentials.
   // This will set an `Authorization` header, overwriting any existing
   // `Authorization` custom headers you have set using `headers`.
   // Please note that only HTTP Basic auth is configurable through this parameter.
   // For Bearer tokens and such, use `Authorization` custom headers instead.
   auth: {
-    username: 'janedoe',
-    password: 's00pers3cret'
-  },
+    username: 'sam',
+    password: 'pass'
+  }, //This will be transformed and added to header -> "Authorization": "Basic c2FtOnBhc3M="
 
   // `responseType` indicates the type of data that the server will respond with
   // options are: 'arraybuffer', 'document', 'json', 'text', 'stream'
@@ -203,12 +184,6 @@ These are the available config options for making requests. Only the `url` is re
   // `responseEncoding` indicates encoding to use for decoding responses
   // Note: Ignored for `responseType` of 'stream' or client-side requests
   responseEncoding: 'utf8', // default
-
-  // `xsrfCookieName` is the name of the cookie to use as a value for xsrf token
-  xsrfCookieName: 'XSRF-TOKEN', // default
-
-  // `xsrfHeaderName` is the name of the http header that carries the xsrf token value
-  xsrfHeaderName: 'X-XSRF-TOKEN', // default
 
   // `onUploadProgress` allows handling of progress events for uploads
   onUploadProgress: function (progressEvent) {
@@ -240,31 +215,6 @@ These are the available config options for making requests. Only the `url` is re
   // Only either `socketPath` or `proxy` can be specified.
   // If both are specified, `socketPath` is used.
   socketPath: null, // default
-
-  // `httpAgent` and `httpsAgent` define a custom agent to be used when performing http
-  // and https requests, respectively, in node.js. This allows options to be added like
-  // `keepAlive` that are not enabled by default.
-  httpAgent: new http.Agent({ keepAlive: true }),
-  httpsAgent: new https.Agent({ keepAlive: true }),
-
-  // 'proxy' defines the hostname and port of the proxy server.
-  // You can also define your proxy using the conventional `http_proxy` and
-  // `https_proxy` environment variables. If you are using environment variables
-  // for your proxy configuration, you can also define a `no_proxy` environment
-  // variable as a comma-separated list of domains that should not be proxied.
-  // Use `false` to disable proxies, ignoring environment variables.
-  // `auth` indicates that HTTP Basic auth should be used to connect to the proxy, and
-  // supplies credentials.
-  // This will set an `Proxy-Authorization` header, overwriting any existing
-  // `Proxy-Authorization` custom headers you have set using `headers`.
-  proxy: {
-    host: '127.0.0.1',
-    port: 9000,
-    auth: {
-      username: 'mikeymike',
-      password: 'rapunz3l'
-    }
-  },
 
   // `cancelToken` specifies a cancel token that can be used to cancel the request
   // (see Cancellation section below for details)

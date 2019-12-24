@@ -1,4 +1,4 @@
-import { soxa } from 'https://raw.githubusercontent.com/fakoua/soxa/master/mod.ts'
+import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 import { test, assert, assertEquals } from "./test_deps.ts"
 
 
