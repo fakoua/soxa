@@ -1,6 +1,6 @@
-import { settle } from '../core/settle.js'
-import { buildURL } from '../helpers/buildURL.js'
-import { buildFullPath } from '../core/buildFullPath.js'
+import { settle } from '../core/settle.ts'
+import { buildURL } from '../helpers/buildURL.ts'
+import { buildFullPath } from '../core/buildFullPath.ts'
 const fetchAdapter = function (config) {
     // At this point:
     //  - config has been merged with defaults

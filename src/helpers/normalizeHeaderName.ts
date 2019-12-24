@@ -1,9 +1,7 @@
-'use strict';
-
 import * as utils from '../utils.js'
 
-const normalizeHeaderName = function (headers, normalizedName) {
-  utils.forEach(headers, function processHeader(value, name) {
+const normalizeHeaderName = function (headers: object, normalizedName: string): void {
+  utils.forEach(headers, function processHeader(value: string, name: string): void {
     if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
       headers[normalizedName] = value;
       delete headers[name];

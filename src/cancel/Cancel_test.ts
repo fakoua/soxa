@@ -1,4 +1,4 @@
-import { Cancel } from "./Cancel.js"
+import { Cancel } from "./Cancel.ts"
 import { test, assert, assertEquals} from "../../test_deps.ts"
 
 test(function test_Cancel_Instance() {

@@ -1,4 +1,4 @@
-import { buildURL } from "./buildURL.js"
+import { buildURL } from "./buildURL.ts"
 import { test, assertEquals } from '../../test_deps.ts'
 
 test(function test_buildURL_Instance() {

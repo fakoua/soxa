@@ -1,6 +1,4 @@
-'use strict';
-
-const isCancel = function (value) {
+const isCancel = function (value): boolean {
   return !!(value && value.__CANCEL__);
 };
 

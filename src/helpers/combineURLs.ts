@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Creates a new URL by combining the specified URLs
  *
@@ -7,7 +5,7 @@
  * @param {string} relativeURL The relative URL
  * @returns {string} The combined URL
  */
-const combineURLs = function (baseURL, relativeURL) {
+const combineURLs = function (baseURL: string, relativeURL: string): string {
   return relativeURL
     ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
     : baseURL;

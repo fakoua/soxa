@@ -1,4 +1,4 @@
-import {normalizeHeaderName} from "./normalizeHeaderName.js"
+import {normalizeHeaderName} from "./normalizeHeaderName.ts"
 import { test, assertEquals } from '../../test_deps.ts'
 
 test(function test_normalizeHeaderName_ContentType() {

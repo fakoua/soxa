@@ -1,1 +1,1 @@
-export { soxa } from "./src/soxa.js"
+export { soxa } from "./src/soxa.ts"

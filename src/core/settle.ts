@@ -1,6 +1,4 @@
-'use strict';
-
-import { createError } from './createError.js'
+import { createError } from './createError.ts'
 
 /**
  * Resolve or reject a Promise based on response status.

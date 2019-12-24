@@ -1,7 +1,5 @@
-'use strict';
-
 import * as utils from './utils.js'
-import { normalizeHeaderName } from './helpers/normalizeHeaderName.js'
+import { normalizeHeaderName } from './helpers/normalizeHeaderName.ts'
 import { fetchAdapter } from './adapters/fetchAdapter.js'
 
 var DEFAULT_CONTENT_TYPE = {
@@ -18,7 +16,18 @@ function getDefaultAdapter() {
   return fetchAdapter;
 }
 
-var defaults = {
+let defaults = {
+  headers: {
+    common: {
+      'Accept': 'application/json, text/plain, */*'
+    },
+    delete: {},
+    get: {},
+    head: {},
+    post: utils.merge(DEFAULT_CONTENT_TYPE),
+    put: utils.merge(DEFAULT_CONTENT_TYPE),
+    patch: utils.merge(DEFAULT_CONTENT_TYPE)
+  },
   adapter: getDefaultAdapter(),
 
   transformRequest: [function transformRequest(data, headers) {
@@ -72,18 +81,5 @@ var defaults = {
     return status >= 200 && status < 300;
   }
 };
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-defaults.headers.delete = {};
-defaults.headers.get = {};
-defaults.headers.head = {};
-defaults.headers.post = utils.merge(DEFAULT_CONTENT_TYPE);
-defaults.headers.put = utils.merge(DEFAULT_CONTENT_TYPE);
-defaults.headers.patch = utils.merge(DEFAULT_CONTENT_TYPE);
 
 export { defaults }

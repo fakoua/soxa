@@ -1,4 +1,4 @@
-import { isAbsoluteURL } from "./isAbsoluteURL.js"
+import { isAbsoluteURL } from "./isAbsoluteURL.ts"
 import { test, assert } from '../../test_deps.ts'
 
 test(function test_isAbsoluteURL_Format1() {

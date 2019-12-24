@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Update an Error with the specified config, error code, and response.
  *

@@ -1,8 +1,6 @@
-'use strict';
-
 import * as utils from '../utils.js'
 
-function encode(val) {
+function encode(val: string) : string {
   return encodeURIComponent(val).
     replace(/%40/gi, '@').
     replace(/%3A/gi, ':').
@@ -20,13 +18,13 @@ function encode(val) {
  * @param {object} [params] The params to be appended
  * @returns {string} The formatted url
  */
-const buildURL = function (url, params, paramsSerializer) {
+const buildURL = function (url: string, params: any, paramsSerializer: any) :string {
   /*eslint no-param-reassign:0*/
   if (!params) {
     return url;
   }
 
-  var serializedParams;
+  let serializedParams;
   if (paramsSerializer) {
     serializedParams = paramsSerializer(params);
   } else if (utils.isURLSearchParams(params)) {

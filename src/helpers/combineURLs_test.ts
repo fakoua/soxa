@@ -1,4 +1,4 @@
-import { combineURLs } from "./combineURLs.js"
+import { combineURLs } from "./combineURLs.ts"
 import { test, assertEquals } from '../../test_deps.ts'
 
 test(function test_combineURLs_Format1() {

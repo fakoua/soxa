@@ -1,4 +1,4 @@
-import { defaults } from './defaults.js'
+import { defaults } from './defaults.ts'
 import { test, assertEquals } from '../test_deps.ts'
 
 console.log( typeof defaults)

@@ -1,14 +1,14 @@
 'use strict';
 
 import * as utils from '../utils.js'
-import { transformData } from './transformData.js'
-import { isCancel } from '../cancel/isCancel.js'
-import { defaults } from '../defaults.js'
+import { transformData } from './transformData.ts'
+import { isCancel } from '../cancel/isCancel.ts'
+import { defaults } from '../defaults.ts'
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
  */
-function throwIfCancellationRequested(config) {
+function throwIfCancellationRequested(config): void {
   if (config.cancelToken) {
     config.cancelToken.throwIfRequested();
   }
@@ -20,7 +20,7 @@ function throwIfCancellationRequested(config) {
  * @param {object} config The config that is to be used for the request
  * @returns {Promise} The Promise to be fulfilled
  */
-const dispatchRequest = function (config) {
+const dispatchRequest = function (config): Promise<any> {
   throwIfCancellationRequested(config);
 
   // Ensure headers exist
@@ -42,12 +42,12 @@ const dispatchRequest = function (config) {
 
   utils.forEach(
     ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-    function cleanHeaderConfig(method) {
+    function cleanHeaderConfig(method: string) {
       delete config.headers[method];
     }
   );
 
-  var adapter = config.adapter || defaults.adapter;
+  let adapter = config.adapter || defaults.adapter;
 
   return adapter(config).then(function onAdapterResolution(response) {
     throwIfCancellationRequested(config);

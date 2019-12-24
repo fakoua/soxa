@@ -1,6 +1,4 @@
-'use strict';
-
-import { enhanceError } from './enhanceError.js'
+import { enhanceError } from './enhanceError.ts'
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -12,7 +10,7 @@ import { enhanceError } from './enhanceError.js'
  * @param {Object} [response] The response.
  * @returns {Error} The created error.
  */
-const createError = function (message, config, code, request, response) {
+const createError = function (message: string, config: any, code: any, request: any, response: any) {
   var error = new Error(message);
   return enhanceError(error, config, code, request, response);
 };
