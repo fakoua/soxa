@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: GitHub Action for Deno
+    - uses: denolib/deno-action@0.20.0
+
