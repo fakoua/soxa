@@ -1,0 +1,1 @@
+deno bundle mod.ts > soxa.bundle.ts

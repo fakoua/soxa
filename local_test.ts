@@ -1,9 +1,11 @@
-import { soxa } from "./mod.ts"
+import { soxa } from "./soxa.bundle.ts"
 
-soxa.defaults.baseURL = 'https://soxadeno.free.beeceptor.co'
+soxa.defaults.baseURL = 'https://soxadeno.free.beeceptor.com'
 
 soxa.get('/user/12345')
-  .catch(function (error) {
+.then((res) => {
+  console.log(res.data)
+}).catch(function (error) {
       console.log('in the catch')
     if (error.response) {
       // The request was made and the server responded with a status code
