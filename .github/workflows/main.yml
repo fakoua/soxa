@@ -8,10 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: GitHub Action for Deno
+    - name: Install Deno
       run: |
         curl -L https://deno.land/x/install/install.sh | sh -s "v0.25.0"
         export PATH="$HOME/.deno/bin:$PATH"
         deno run -A test.ts
+        steps:
+    - name: Run the tests
+      run: |
+        deno run -A test.ts
+
+
 
 
