@@ -9,6 +9,9 @@ jobs:
 
     steps:
     - name: GitHub Action for Deno
-      uses: denolib/deno-action@0.19.0
+      run: |
+        curl -L https://deno.land/x/install/install.sh | sh -s "v0.25.0"
+        export PATH="$HOME/.deno/bin:$PATH"
+        deno run -A test.ts
 
 
