@@ -9,5 +9,5 @@ jobs:
 
     steps:
     - name: CI
-    - uses: denolib/deno-action@0.20.0
+      uses: denolib/deno-action@0.20.0
 
