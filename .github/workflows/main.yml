@@ -1,21 +1,18 @@
 name: CI
-
-on: [push]
-
+on:
+  push:
+    branches: [master]
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        deno: [0.25.0, 0.24.0]
+    name: Deno ${{ matrix.deno }} sample
     steps:
-    - name: Install Deno
-      run: |
-        curl -L https://deno.land/x/install/install.sh | sh -s "v0.25.0"
-        export PATH="$HOME/.deno/bin:$PATH"
-    - name: Run the tests
-      run: |
-        /home/runner/.local/bin/deno run -A test.ts
-
-
-
-
+      - uses: actions/checkout@master
+      - name: Setup Deno
+        uses: denolib/setup-deno@v1.1.0
+        with:
+          deno-version: ${{ matrix.deno }}
+      - run: deno test --allow-net
