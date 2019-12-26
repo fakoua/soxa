@@ -5,14 +5,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-16.04
-    strategy:
-      matrix:
-        deno: [0.25.0, 0.24.0]
-    name: Deno ${{ matrix.deno }} sample
     steps:
-      - uses: actions/checkout@master
-      - name: Setup Deno
-        uses: denolib/setup-deno@v1.1.0
-        with:
-          deno-version: ${{ matrix.deno }}
-      - run: deno test --allow-net
+      - name: GitHub Action for Deno
+        uses: denolib/deno-action@0.19.0
