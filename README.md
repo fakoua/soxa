@@ -1,6 +1,8 @@
 # soxa
 
 [![Build Status](https://api.travis-ci.com/fakoua/soxa.svg?branch=master)](https://travis-ci.com/fakoua/soxa)
+[![Build Status](https://github.com/fakoua/soxa/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/fakoua/soxa/actions)
+
 
 Promise based HTTP client for deno
 
