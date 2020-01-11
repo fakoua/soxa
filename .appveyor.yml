@@ -1,8 +1,0 @@
-install:
-  - ps: iex (iwr https://deno.land/x/install/install.ps1)
-  
-build: off
-shallow_clone: true
-
-test_script: 
-  - cmd: deno -A test.ts
