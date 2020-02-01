@@ -223,6 +223,23 @@ These are the available config options for making requests. Only the `url` is re
   cancelToken: new CancelToken(function (cancel) {
   })
 }
+
+//Example auth:
+
+let config = {
+    auth: {
+        username: 'myUser',
+        password: 'myPassword'
+      }
+}
+
+soxa.post(url, {} ,config)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 ## Response Schema

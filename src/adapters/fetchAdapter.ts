@@ -56,12 +56,14 @@ const fetchAdapter = function (config): Promise<any> {
               status: res.status,
               statusText: res.statusText,
               headers: h,
-              config: config,
-              request: ''
+              config: config
             }
             settle(resolve, reject, response);        
           })
         }))
+        .catch((er) => {
+          reject(er)
+        })
   
       // From here:
       //  - response transformers will run
