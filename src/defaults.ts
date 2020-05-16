@@ -6,6 +6,7 @@ var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
 };
 
+// @ts-ignore
 function setContentTypeIfUnset(headers, value) {
   if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
     headers['Content-Type'] = value;
@@ -30,6 +31,7 @@ let defaults = {
   },
   adapter: getDefaultAdapter(),
 
+  // @ts-ignore
   transformRequest: [function transformRequest(data, headers) {
     normalizeHeaderName(headers, 'Accept');
     normalizeHeaderName(headers, 'Content-Type');
@@ -56,6 +58,7 @@ let defaults = {
     return data;
   }],
 
+  // @ts-ignore
   transformResponse: [function transformResponse(data) {
     /*eslint no-param-reassign:0*/
     if (typeof data === 'string') {
@@ -77,6 +80,7 @@ let defaults = {
 
   maxContentLength: -1,
 
+  // @ts-ignore
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
   }

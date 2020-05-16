@@ -30,8 +30,10 @@ const buildURL = function (url: string, params: any, paramsSerializer: any) :str
   } else if (utils.isURLSearchParams(params)) {
     serializedParams = params.toString();
   } else {
+    // @ts-ignore
     var parts = [];
 
+    // @ts-ignore
     utils.forEach(params, function serialize(val, key) {
       if (val === null || typeof val === 'undefined') {
         return;
@@ -43,6 +45,7 @@ const buildURL = function (url: string, params: any, paramsSerializer: any) :str
         val = [val];
       }
 
+      // @ts-ignore
       utils.forEach(val, function parseValue(v) {
         if (utils.isDate(v)) {
           v = v.toISOString();
@@ -53,6 +56,7 @@ const buildURL = function (url: string, params: any, paramsSerializer: any) :str
       });
     });
 
+    // @ts-ignore
     serializedParams = parts.join('&');
   }
 

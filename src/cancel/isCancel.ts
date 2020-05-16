@@ -1,3 +1,4 @@
+// @ts-ignore
 const isCancel = function (value): boolean {
   return !!(value && value.__CANCEL__);
 };

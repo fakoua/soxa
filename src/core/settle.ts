@@ -1,12 +1,6 @@
 import { createError } from './createError.ts'
 
-/**
- * Resolve or reject a Promise based on response status.
- *
- * @param {Function} resolve A function that resolves the promise.
- * @param {Function} reject A function that rejects the promise.
- * @param {object} response The response.
- */
+// @ts-ignore
 const settle = function (resolve, reject, response) {
   var validateStatus = response.config.validateStatus;
   if (!validateStatus || validateStatus(response.status)) {

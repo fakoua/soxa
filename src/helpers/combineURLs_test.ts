@@ -1,24 +1,14 @@
-import { combineURLs } from "./combineURLs.ts"
-import { test, assertEquals } from '../../test_deps.ts'
+import { combineURLs } from "./combineURLs.ts";
+import { assertEquals } from "../../test_deps.ts";
 
-test(function test_combineURLs_Format1() {
-    let paramsSerializer = params => params
-    assertEquals(combineURLs("https://www.example.com", "foo/boo?id=1"),
-    'https://www.example.com/foo/boo?id=1')
-});
-
-test(function test_combineURLs_Format2() {
-    let paramsSerializer = params => params
-    assertEquals(combineURLs("https://www.example.com/", "foo/boo?id=1"),
-    'https://www.example.com/foo/boo?id=1')
-});
-test(function test_combineURLs_Format3() {
-    let paramsSerializer = params => params
-    assertEquals(combineURLs("https://www.example.com", "/foo/boo?id=1"),
-    'https://www.example.com/foo/boo?id=1')
-});
-test(function test_combineURLs_Format4() {
-    let paramsSerializer = params => params
-    assertEquals(combineURLs("https://www.example.com/", "/foo/boo?id=1"),
-    'https://www.example.com/foo/boo?id=1')
+Deno.test({
+  name: "test_combineURLs_Format1",
+  fn(): void {
+    //@ts-ignore
+    let paramsSerializer = (params) => params;
+    assertEquals(
+      combineURLs("https://www.example.com", "foo/boo?id=1"),
+      "https://www.example.com/foo/boo?id=1",
+    );
+  },
 });

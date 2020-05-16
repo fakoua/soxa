@@ -1,11 +1,13 @@
-import { soxa } from "./soxa.bundle.ts"
+import { soxa } from "./mod.ts"
+soxa.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
 
-soxa.defaults.baseURL = 'https://soxadeno.free.beeceptor.com'
-
-soxa.get('/user/12345')
+soxa.get('/users')
+// @ts-ignore
 .then((res) => {
   console.log(res.data)
-}).catch(function (error) {
+})
+// @ts-ignore
+.catch(function (error) {
       console.log('in the catch')
     if (error.response) {
       // The request was made and the server responded with a status code

@@ -1,8 +1,14 @@
-import { buildURL } from "./buildURL.ts"
-import { test, assertEquals } from '../../test_deps.ts'
+import { buildURL } from "./buildURL.ts";
+import { assertEquals } from "../../test_deps.ts";
 
-test(function test_buildURL_Instance() {
-    let paramsSerializer = params => params
-    assertEquals(buildURL('https://www.example.com', 'id=1', paramsSerializer),
-    'https://www.example.com?id=1')
+Deno.test({
+  name: "test_buildURL_Instance",
+  fn(): void {
+      //@ts-ignore
+    let paramsSerializer = (params) => params;
+    assertEquals(
+      buildURL("https://www.example.com", "id=1", paramsSerializer),
+      "https://www.example.com?id=1",
+    );
+  },
 });

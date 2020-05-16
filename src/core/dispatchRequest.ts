@@ -5,21 +5,14 @@ import { transformData } from './transformData.ts'
 import { isCancel } from '../cancel/isCancel.ts'
 import { defaults } from '../defaults.ts'
 
-/**
- * Throws a `Cancel` if cancellation has been requested.
- */
+// @ts-ignore
 function throwIfCancellationRequested(config): void {
   if (config.cancelToken) {
     config.cancelToken.throwIfRequested();
   }
 }
 
-/**
- * Dispatch a request to the server using the configured adapter.
- *
- * @param {object} config The config that is to be used for the request
- * @returns {Promise} The Promise to be fulfilled
- */
+// @ts-ignore
 const dispatchRequest = function (config): Promise<any> {
   throwIfCancellationRequested(config);
 
@@ -49,6 +42,7 @@ const dispatchRequest = function (config): Promise<any> {
 
   let adapter = config.adapter || defaults.adapter;
 
+  // @ts-ignore
   return adapter(config).then(function onAdapterResolution(response) {
     throwIfCancellationRequested(config);
 
@@ -60,7 +54,9 @@ const dispatchRequest = function (config): Promise<any> {
     );
 
     return response;
-  }, function onAdapterRejection(reason) {
+  }, 
+  // @ts-ignore
+  function onAdapterRejection(reason) {
     if (!isCancel(reason)) {
       throwIfCancellationRequested(config);
 

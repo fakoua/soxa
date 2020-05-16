@@ -1,10 +1,15 @@
-import {normalizeHeaderName} from "./normalizeHeaderName.ts"
-import { test, assertEquals } from '../../test_deps.ts'
+import { normalizeHeaderName } from "./normalizeHeaderName.ts";
+import { assertEquals } from "../../test_deps.ts";
 
-test(function test_normalizeHeaderName_ContentType() {
+Deno.test({
+  name: "test_normalizeHeaderName_ContentType",
+
+  fn(): void {
     let headers = {
-        'content-type': 'oCtAl/aNy',
-    }
-    normalizeHeaderName(headers, 'Content-Type')
-    assertEquals(headers['Content-Type'], 'oCtAl/aNy')
+      "content-type": "oCtAl/aNy",
+    };
+    normalizeHeaderName(headers, "Content-Type");
+    //@ts-ignore
+    assertEquals(headers["Content-Type"], "oCtAl/aNy");
+  },
 });

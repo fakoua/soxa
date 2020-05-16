@@ -7,17 +7,20 @@ import { Cancel } from './Cancel.ts'
  */
 export class CancelToken {
     promise: Promise<any>
+    // @ts-ignore
     reason: Cancel
     constructor(executor: any) {
         if (typeof executor !== 'function') {
             throw new TypeError('executor must be a function.');
         }
+        // @ts-ignore
         var resolvePromise;
         this.promise = new Promise(function promiseExecutor(resolve) {
             resolvePromise = resolve;
         });
 
         var token = this;
+        // @ts-ignore
         executor(function cancel(message) {
             if (token.reason) {
                 // Cancellation has already been requested
@@ -25,6 +28,7 @@ export class CancelToken {
             }
 
             token.reason = new Cancel(message);
+            // @ts-ignore
             resolvePromise(token.reason);
         });
     }
@@ -35,6 +39,7 @@ export class CancelToken {
     }
     source(): object {
         var cancel;
+        // @ts-ignore
         var token = new CancelToken(function executor(c) {
             cancel = c;
         });

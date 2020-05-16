@@ -1,13 +1,6 @@
 import * as utils from '../utils.ts'
 
-/**
- * Config-specific merge-function which creates a new config-object
- * by merging two configuration objects together.
- *
- * @param {Object} config1
- * @param {Object} config2
- * @returns {Object} New object resulting from merging config2 to config1
- */
+// @ts-ignore
 const mergeConfig = function (config1, config2) {
   // eslint-disable-next-line no-param-reassign
   config2 = config2 || {};
@@ -25,26 +18,33 @@ const mergeConfig = function (config1, config2) {
 
   utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop: string) {
     if (typeof config2[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config2[prop];
     }
   });
 
   utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop: string) {
     if (utils.isObject(config2[prop])) {
+      // @ts-ignore
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config2[prop];
     } else if (utils.isObject(config1[prop])) {
+      // @ts-ignore
       config[prop] = utils.deepMerge(config1[prop]);
     } else if (typeof config1[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config1[prop];
     }
   });
 
   utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop: string) {
     if (typeof config2[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config1[prop];
     }
   });
@@ -61,8 +61,10 @@ const mergeConfig = function (config1, config2) {
 
   utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop: string) {
     if (typeof config2[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
+      // @ts-ignore
       config[prop] = config1[prop];
     }
   });

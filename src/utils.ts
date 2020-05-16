@@ -2,63 +2,33 @@
 
 var toString = Object.prototype.toString;
 
-/**
- * Determine if a value is an Array
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an Array, otherwise false
- */
+// @ts-ignore
 function isArray(val) {
   return toString.call(val) === '[object Array]';
 }
 
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
+// @ts-ignore
 function isUndefined(val) {
   return typeof val === 'undefined';
 }
 
-/**
- * Determine if a value is a Buffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Buffer, otherwise false
- */
+// @ts-ignore
 function isBuffer(val) {
   return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
     && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
-/**
- * Determine if a value is an ArrayBuffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an ArrayBuffer, otherwise false
- */
+// @ts-ignore
 function isArrayBuffer(val) {
   return toString.call(val) === '[object ArrayBuffer]';
 }
 
-/**
- * Determine if a value is a FormData
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an FormData, otherwise false
- */
+// @ts-ignore
 function isFormData(val) {
   return (typeof FormData !== 'undefined') && (val instanceof FormData);
 }
 
-/**
- * Determine if a value is a view on an ArrayBuffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
- */
+// @ts-ignore
 function isArrayBufferView(val) {
   var result;
   if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
@@ -69,88 +39,42 @@ function isArrayBufferView(val) {
   return result;
 }
 
-/**
- * Determine if a value is an Object
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an Object, otherwise false
- */
+// @ts-ignore
 function isObject(val) {
   return val !== null && typeof val === 'object';
 }
 
-/**
- * Determine if a value is a Date
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Date, otherwise false
- */
+// @ts-ignore
 function isDate(val) {
   return toString.call(val) === '[object Date]';
 }
 
-/**
- * Determine if a value is a File
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a File, otherwise false
- */
+// @ts-ignore
 function isFile(val) {
   return toString.call(val) === '[object File]';
 }
 
-/**
- * Determine if a value is a Blob
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Blob, otherwise false
- */
+// @ts-ignore
 function isBlob(val) {
   return toString.call(val) === '[object Blob]';
 }
 
-/**
- * Determine if a value is a Function
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Function, otherwise false
- */
+// @ts-ignore
 function isFunction(val) {
   return toString.call(val) === '[object Function]';
 }
 
-/**
- * Determine if a value is a Stream
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Stream, otherwise false
- */
+// @ts-ignore
 function isStream(val) {
   return isObject(val) && isFunction(val.pipe);
 }
 
-/**
- * Determine if a value is a URLSearchParams object
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a URLSearchParams object, otherwise false
- */
+// @ts-ignore
 function isURLSearchParams(val) {
   return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
-/**
- * Iterate over an Array or an Object invoking a function for each item.
- *
- * If `obj` is an Array callback will be called passing
- * the value, index, and complete array for each item.
- *
- * If 'obj' is an Object callback will be called passing
- * the value, key, and complete object for each property.
- *
- * @param {Object|Array} obj The object to iterate
- * @param {Function} fn The callback to invoke for each item
- */
+// @ts-ignore
 function forEach(obj, fn) {
   // Don't bother if no value provided
   if (obj === null || typeof obj === 'undefined') {
@@ -197,10 +121,14 @@ function forEach(obj, fn) {
  */
 function merge(...args: any[]) {
   var result = {};
+  // @ts-ignore
   function assignValue(val, key) {
+    // @ts-ignore
     if (typeof result[key] === 'object' && typeof val === 'object') {
+      // @ts-ignore
       result[key] = merge(result[key], val);
     } else {
+      // @ts-ignore
       result[key] = val;
     }
   }
@@ -221,12 +149,17 @@ function merge(...args: any[]) {
  */
 function deepMerge(...args: any[]) {
   var result = {};
+  // @ts-ignore
   function assignValue(val, key) {
+    // @ts-ignore
     if (typeof result[key] === 'object' && typeof val === 'object') {
+      // @ts-ignore
       result[key] = deepMerge(result[key], val);
     } else if (typeof val === 'object') {
+      // @ts-ignore
       result[key] = deepMerge({}, val);
     } else {
+      // @ts-ignore
       result[key] = val;
     }
   }

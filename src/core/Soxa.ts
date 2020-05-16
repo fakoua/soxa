@@ -8,11 +8,7 @@ export class Soxa {
     defaults: any
     interceptors: any
 
-    /**
-     * Create a new instance of Soxa
-     *
-     * @param {Object} instanceConfig The default config for the instance
-     */
+    // @ts-ignore
     constructor(instanceConfig) {
         this.defaults = instanceConfig;
         this.interceptors = {
@@ -21,11 +17,7 @@ export class Soxa {
         };
     }
 
-    /**
-     * Dispatch a request
-     *
-     * @param {Object} config The config specific for this request (merged with this.defaults)
-     */
+    // @ts-ignore
     request(config): Promise<any> {
         // Allow for soxa('example/url'[, config]) a la fetch API
         if (typeof config === 'string') {
@@ -48,10 +40,12 @@ export class Soxa {
         let chain = [dispatchRequest, undefined];
         let promise = Promise.resolve(config);
 
+        // @ts-ignore
         this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
             chain.unshift(interceptor.fulfilled, interceptor.rejected);
         });
 
+        // @ts-ignore
         this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
@@ -63,6 +57,7 @@ export class Soxa {
         return promise;
     }
 
+    // @ts-ignore
     getUri(config): string {
         config = mergeConfig(this.defaults, config);
         return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
@@ -83,18 +78,23 @@ export class Soxa {
         }))
     }
 
+    // @ts-ignore
     delete(url: string, config?): Promise<any> {
         return this.requestURL(url, 'delete', config)
     }
 
+    // @ts-ignore
     get(url: string, config?): Promise<any> {
+        console.log(url)
         return this.requestURL(url, 'get', config)
     }
 
+    // @ts-ignore
     head(url: string, config?): Promise<any> {
         return this.requestURL(url, 'head', config)
     }
 
+    // @ts-ignore
     options(url: string, config?): Promise<any> {
         return this.requestURL(url, 'options', config)
     }

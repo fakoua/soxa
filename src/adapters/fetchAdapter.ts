@@ -2,6 +2,7 @@ import { settle } from '../core/settle.ts'
 import { buildURL } from '../helpers/buildURL.ts'
 import { buildFullPath } from '../core/buildFullPath.ts'
 
+// @ts-ignore
 const fetchAdapter = function (config): Promise<any> {
     // At this point:
     //  - config has been merged with defaults
@@ -10,7 +11,6 @@ const fetchAdapter = function (config): Promise<any> {
     
     // Make the request using config provided
     // Upon response settle the Promise
-  
     return new Promise(function(resolve, reject) {
   
       let fullPath = buildFullPath(config.baseURL, config.url);
@@ -46,6 +46,7 @@ const fetchAdapter = function (config): Promise<any> {
         .then((res => {
           let h = {}
           for (let [key, value] of res.headers) {
+            // @ts-ignore
             h[key] = value
           }
 
