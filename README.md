@@ -19,7 +19,7 @@ Promise based HTTP client for deno
 
 Using deno:
 
-```js
+```ts
 import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 ```
 
@@ -57,14 +57,14 @@ soxa.get('https://jsonplaceholder.typicode.com/todos/1')
 
 Performing a `GET` request (Await/Async)
 
-```js
+```ts
 let result = await soxa.get('https://jsonplaceholder.typicode.com/todos/1');
 console.log(result.data)
 ```
 
 Performing a `POST` request
 
-```js
+```ts
 let response = await soxa.post('https://jsonplaceholder.typicode.com/posts', {
                           "title": "Hello Soxa",
                           "id": 14
@@ -83,7 +83,7 @@ let response = await soxa.post('https://jsonplaceholder.typicode.com/posts', {},
 
 ## URL Examples
 
-```js
+```ts
 await soxa.get('http://example.com'); // http://example.com
 await soxa.get('http://example.com', { params: { q: 'hello' } }); // http://example.com?q=hello
 await soxa.get('http://example.com', { params: { q: 'hello', id: 12 } }); // http://example.com?q=hello&id=12
@@ -104,7 +104,7 @@ await soxa.get('/folder', config); // http://example.com/folder?q=hello
 
 These are the available config options for making requests. Only the `url` is required. Requests will default to `GET` if `method` is not specified.
 
-```js
+```ts
 {
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of soxa to pass relative URLs
@@ -246,7 +246,7 @@ soxa.post(url, {} ,config)
 
 The response for a request contains the following information.
 
-```js
+```ts
 {
   // `data` is the response that was provided by the server
   data: {},
@@ -273,7 +273,7 @@ The response for a request contains the following information.
 
 When using `then`, you will receive the response as follows:
 
-```js
+```ts
 soxa.get('/user/12345')
   .then(function (response) {
     console.log(response.data);
@@ -292,7 +292,7 @@ You can specify config defaults that will be applied to every request.
 
 ### Global soxa defaults
 
-```js
+```ts
 soxa.defaults.baseURL = 'https://api.example.com';
 soxa.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 soxa.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -302,7 +302,7 @@ soxa.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 You can intercept requests or responses before they are handled by `then` or `catch`.
 
-```js
+```ts
 // Add a request interceptor
 soxa.interceptors.request.use(function (config) {
     // Do something before request is sent
@@ -326,7 +326,7 @@ soxa.interceptors.response.use(function (response) {
 
 If you need to remove an interceptor later you can.
 
-```js
+```ts
 const myInterceptor = soxa.interceptors.request.use(function () {/*...*/});
 soxa.interceptors.request.eject(myInterceptor);
 ```
@@ -340,7 +340,7 @@ instance.interceptors.request.use(function () {/*...*/});
 
 ## Handling Errors
 
-```js
+```ts
 soxa.get('/user/12345')
   .catch(function (error) {
     if (error.response) {
@@ -364,7 +364,7 @@ soxa.get('/user/12345')
 
 Using the `validateStatus` config option, you can define HTTP code(s) that should throw an error.
 
-```js
+```ts
 soxa.get('/user/12345', {
   validateStatus: function (status) {
     return status < 500; // Reject only if the status code is greater than or equal to 500
@@ -374,7 +374,7 @@ soxa.get('/user/12345', {
 
 Using `toJSON` you get an object with more information about the HTTP error.
 
-```js
+```ts
 soxa.get('/user/12345')
   .catch(function (error) {
     console.log(error.toJSON());
@@ -389,7 +389,7 @@ You can cancel a request using a *cancel token*.
 
 You can create a cancel token using the `CancelToken.source` factory as shown below:
 
-```js
+```ts
 const CancelToken = soxa.CancelToken;
 const source = CancelToken.source();
 
@@ -415,7 +415,7 @@ source.cancel('Operation canceled by the user.');
 
 You can also create a cancel token by passing an executor function to the `CancelToken` constructor:
 
-```js
+```ts
 const CancelToken = soxa.CancelToken;
 let cancel;
 
