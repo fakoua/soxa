@@ -27,7 +27,7 @@ import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 
 Performing a `GET` request (Promise)
 
-```js
+```ts
 import { soxa } from 'https://deno.land/x/soxa/mod.ts'
 
 // soxa.get(url, config)
