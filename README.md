@@ -333,7 +333,7 @@ soxa.interceptors.request.eject(myInterceptor);
 
 You can add interceptors to a custom instance of soxa.
 
-```js
+```ts
 const instance = soxa.create();
 instance.interceptors.request.use(function () {/*...*/});
 ```
