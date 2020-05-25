@@ -1,3 +1,4 @@
+import * as log from 'https://deno.land/std/log/mod.ts'
 import * as utils from '../utils.ts'
 import { buildURL } from '../helpers/buildURL.ts'
 import { InterceptorManager } from './InterceptorManager.ts'
@@ -85,7 +86,6 @@ export class Soxa {
 
     // @ts-ignore
     get(url: string, config?): Promise<any> {
-        console.log(url)
         return this.requestURL(url, 'get', config)
     }
 
