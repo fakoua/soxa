@@ -1,6 +1,7 @@
 # soxa
 
-[![Build Status](https://api.travis-ci.com/fakoua/soxa.svg?branch=master)](https://travis-ci.com/fakoua/soxa)
+[![Build Status](https://api.travis-ci.com/fakoua/soxa.svg?branch=master)](https://travis-ci.com/fakoua/soxa)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffakoua%2Fsoxa.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffakoua%2Fsoxa?ref=badge_shield)
+
 [![Build Status](https://github.com/fakoua/soxa/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/fakoua/soxa/actions)
 
 
@@ -443,3 +444,6 @@ soxa is heavily inspired by the [axios](https://github.com/axios/axios) with new
 ## License
 
 [MIT](LICENSE)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffakoua%2Fsoxa.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffakoua%2Fsoxa?ref=badge_large)
