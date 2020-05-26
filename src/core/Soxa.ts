@@ -85,7 +85,6 @@ export class Soxa {
 
     // @ts-ignore
     get(url: string, config?): Promise<any> {
-        console.log(url)
         return this.requestURL(url, 'get', config)
     }
 
