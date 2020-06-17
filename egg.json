@@ -1,0 +1,14 @@
+{
+    "name": "soxa",
+    "description": "Promise based HTTP client for deno.",
+    "stable": true,
+    "files": [
+        "./LICENSE.ts",
+        "./mod.ts",
+        "./mod_test.ts",
+        "./README.md",
+        "./test.ts",
+        "./test_deps.ts",
+        "./src/**/*"
+    ]
+}

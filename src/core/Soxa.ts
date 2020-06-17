@@ -3,6 +3,7 @@ import { buildURL } from '../helpers/buildURL.ts'
 import { InterceptorManager } from './InterceptorManager.ts'
 import { dispatchRequest } from './dispatchRequest.ts'
 import { mergeConfig } from './mergeConfig.ts'
+import { Config } from './Config.ts'
 
 export class Soxa {
     defaults: any
@@ -25,6 +26,36 @@ export class Soxa {
             config.url = arguments[0];
         } else {
             config = config || {};
+            // Set the defaults
+            if (config.timeout == undefined) {
+                config.timeout = 0;
+            }
+
+            if (config.withCredentials == undefined) {
+                config.withCredentials = false;
+            }
+
+            if (config.responseType == undefined) {
+                config.responseType = 'json';
+            }
+
+            if (config.responseEncoding == undefined) {
+                config.responseEncoding = 'utf8';
+            }
+
+            if (config.validateStatus == undefined) {
+                config.validateStatus = function (status: number) {
+                    return status >= 200 && status < 300; // default
+                  };
+            }
+
+            if (config.maxRedirects == undefined) {
+                config.maxRedirects = 5;
+            }
+
+            if (config.socketPath == undefined) {
+                config.socketPath = null;
+            }
         }
 
         config = mergeConfig(this.defaults, config);
@@ -63,14 +94,14 @@ export class Soxa {
         return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
     }
 
-    private requestURL(url: string, method: string, config?: any): Promise<any> {
+    private requestURL(url: string, method: string, config?: string|Config): Promise<any> {
         return this.request(utils.merge(config || {}, {
             method: method,
             url: url
         }));
     }
 
-    private requestData(url: string, data: any, method: string, config?: any): Promise<any> {
+    private requestData(url: string, data: any, method: string, config?: string|Config): Promise<any> {
         return this.request(utils.merge(config || {}, {
             method: method,
             url: url,
@@ -79,35 +110,35 @@ export class Soxa {
     }
 
     // @ts-ignore
-    delete(url: string, config?): Promise<any> {
+    delete(url: string, config?: string|Config): Promise<any> {
         return this.requestURL(url, 'delete', config)
     }
 
     // @ts-ignore
-    get(url: string, config?): Promise<any> {
+    get(url: string, config?: string|Config): Promise<any> {
         console.log(url)
         return this.requestURL(url, 'get', config)
     }
 
     // @ts-ignore
-    head(url: string, config?): Promise<any> {
+    head(url: string, config?: string|Config): Promise<any> {
         return this.requestURL(url, 'head', config)
     }
 
     // @ts-ignore
-    options(url: string, config?): Promise<any> {
+    options(url: string, config?: string|Config): Promise<any> {
         return this.requestURL(url, 'options', config)
     }
 
-    post(url: string, data: any, config?: any): Promise<any> {
+    post(url: string, data: any, config?: string|Config): Promise<any> {
         return this.requestData(url, data, 'post', config)
     }
 
-    put(url: string, data: any, config?: any): Promise<any> {
+    put(url: string, data: any, config?: string|Config): Promise<any> {
         return this.requestData(url, data, 'put', config)
     }
 
-    patch(url: string, data: any, config?: any): Promise<any> {
+    patch(url: string, data: any, config?: string|Config): Promise<any> {
         return this.requestData(url, data, 'patch', config)
     }
 
