@@ -16,7 +16,7 @@ Promise based HTTP client for deno
 - Cancel requests
 - Automatic transforms for JSON data
 
-## Installing
+## Installation
 
 Using deno:
 

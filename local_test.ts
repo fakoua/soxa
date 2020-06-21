@@ -11,4 +11,3 @@ let response = await soxa.post('https://jsonplaceholder.typicode.com/posts', {},
 });
 
 //console.log(response)
-console.log('end')
