@@ -9,13 +9,3 @@ Deno.test({
     assertEquals(typeof defaults, "object");
   },
 });
-
-Deno.test({
-  name: "test_defaults_header",
-  fn(): void {
-    assertEquals(
-      defaults.headers.common.Accept,
-      "application/json, text/plain, */*",
-    );
-  },
-});
