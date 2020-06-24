@@ -116,7 +116,6 @@ export class Soxa {
 
     // @ts-ignore
     get(url: string, config?: string|Config): Promise<any> {
-        console.log(url)
         return this.requestURL(url, 'get', config)
     }
 
