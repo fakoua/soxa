@@ -1,37 +1,37 @@
 // utils is a library of generic helper functions non-specific to soxa
 
-var toString = Object.prototype.toString;
+const toString = Object.prototype.toString;
 
 // @ts-ignore
 function isArray(val) {
-  return toString.call(val) === '[object Array]';
+  return toString.call(val) === "[object Array]";
 }
 
 // @ts-ignore
 function isUndefined(val) {
-  return typeof val === 'undefined';
+  return typeof val === "undefined";
 }
 
 // @ts-ignore
 function isBuffer(val) {
   return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+    && typeof val.constructor.isBuffer === "function" && val.constructor.isBuffer(val);
 }
 
 // @ts-ignore
 function isArrayBuffer(val) {
-  return toString.call(val) === '[object ArrayBuffer]';
+  return toString.call(val) === "[object ArrayBuffer]";
 }
 
 // @ts-ignore
 function isFormData(val) {
-  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+  return (typeof FormData !== "undefined") && (val instanceof FormData);
 }
 
 // @ts-ignore
 function isArrayBufferView(val) {
-  var result;
-  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+  let result;
+  if ((typeof ArrayBuffer !== "undefined") && (ArrayBuffer.isView)) {
     result = ArrayBuffer.isView(val);
   } else {
     result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
@@ -41,27 +41,27 @@ function isArrayBufferView(val) {
 
 // @ts-ignore
 function isObject(val) {
-  return val !== null && typeof val === 'object';
+  return val !== null && typeof val === "object";
 }
 
 // @ts-ignore
 function isDate(val) {
-  return toString.call(val) === '[object Date]';
+  return toString.call(val) === "[object Date]";
 }
 
 // @ts-ignore
 function isFile(val) {
-  return toString.call(val) === '[object File]';
+  return toString.call(val) === "[object File]";
 }
 
 // @ts-ignore
 function isBlob(val) {
-  return toString.call(val) === '[object Blob]';
+  return toString.call(val) === "[object Blob]";
 }
 
 // @ts-ignore
 function isFunction(val) {
-  return toString.call(val) === '[object Function]';
+  return toString.call(val) === "[object Function]";
 }
 
 // @ts-ignore
@@ -71,30 +71,30 @@ function isStream(val) {
 
 // @ts-ignore
 function isURLSearchParams(val) {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+  return typeof URLSearchParams !== "undefined" && val instanceof URLSearchParams;
 }
 
 // @ts-ignore
 function forEach(obj, fn) {
   // Don't bother if no value provided
-  if (obj === null || typeof obj === 'undefined') {
+  if (obj === null || typeof obj === "undefined") {
     return;
   }
 
   // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
+  if (typeof obj !== "object") {
     /*eslint no-param-reassign:0*/
     obj = [obj];
   }
 
   if (isArray(obj)) {
     // Iterate over array values
-    for (var i = 0, l = obj.length; i < l; i++) {
+    for (let i = 0, l = obj.length; i < l; i++) {
       fn.call(null, obj[i], i, obj);
     }
   } else {
     // Iterate over object keys
-    for (var key in obj) {
+    for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
         fn.call(null, obj[key], key, obj);
       }
@@ -120,11 +120,11 @@ function forEach(obj, fn) {
  * @returns {Object} Result of all merge properties
  */
 function merge(...args: any[]) {
-  var result = {};
+  const result = {};
   // @ts-ignore
   function assignValue(val, key) {
     // @ts-ignore
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if (typeof result[key] === "object" && typeof val === "object") {
       // @ts-ignore
       result[key] = merge(result[key], val);
     } else {
@@ -133,7 +133,7 @@ function merge(...args: any[]) {
     }
   }
 
-  for (var i = 0, l = arguments.length; i < l; i++) {
+  for (let i = 0, l = arguments.length; i < l; i++) {
     forEach(arguments[i], assignValue);
   }
   return result;
@@ -148,14 +148,14 @@ function merge(...args: any[]) {
  * @returns {Object} Result of all merge properties
  */
 function deepMerge(...args: any[]) {
-  var result = {};
+  const result = {};
   // @ts-ignore
   function assignValue(val, key) {
     // @ts-ignore
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if (typeof result[key] === "object" && typeof val === "object") {
       // @ts-ignore
       result[key] = deepMerge(result[key], val);
-    } else if (typeof val === 'object') {
+    } else if (typeof val === "object") {
       // @ts-ignore
       result[key] = deepMerge({}, val);
     } else {
@@ -164,7 +164,7 @@ function deepMerge(...args: any[]) {
     }
   }
 
-  for (var i = 0, l = arguments.length; i < l; i++) {
+  for (let i = 0, l = arguments.length; i < l; i++) {
     forEach(arguments[i], assignValue);
   }
   return result;

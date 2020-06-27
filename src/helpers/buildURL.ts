@@ -1,14 +1,14 @@
-import * as utils from '../utils.ts'
+import * as utils from "../utils.ts"
 
-function encode(val: string) : string {
+function encode(val: string): string {
   return encodeURIComponent(val).
-    replace(/%40/gi, '@').
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
+    replace(/%40/gi, "@").
+    replace(/%3A/gi, ":").
+    replace(/%24/g, "$").
+    replace(/%2C/gi, ",").
+    replace(/%20/g, "+").
+    replace(/%5B/gi, "[").
+    replace(/%5D/gi, "]");
 }
 
 /**
@@ -18,7 +18,7 @@ function encode(val: string) : string {
  * @param {object} [params] The params to be appended
  * @returns {string} The formatted url
  */
-const buildURL = function (url: string, params: any, paramsSerializer: any) :string {
+const buildURL = function (url: string, params: any, paramsSerializer: any): string {
   /*eslint no-param-reassign:0*/
   if (!params) {
     return url;
@@ -31,16 +31,16 @@ const buildURL = function (url: string, params: any, paramsSerializer: any) :str
     serializedParams = params.toString();
   } else {
     // @ts-ignore
-    var parts = [];
+    const parts = [];
 
     // @ts-ignore
     utils.forEach(params, function serialize(val, key) {
-      if (val === null || typeof val === 'undefined') {
+      if (val === null || typeof val === "undefined") {
         return;
       }
 
       if (utils.isArray(val)) {
-        key = key + '[]';
+        key = key + "[]";
       } else {
         val = [val];
       }
@@ -52,21 +52,21 @@ const buildURL = function (url: string, params: any, paramsSerializer: any) :str
         } else if (utils.isObject(v)) {
           v = JSON.stringify(v);
         }
-        parts.push(encode(key) + '=' + encode(v));
+        parts.push(encode(key) + "=" + encode(v));
       });
     });
 
     // @ts-ignore
-    serializedParams = parts.join('&');
+    serializedParams = parts.join("&");
   }
 
   if (serializedParams) {
-    var hashmarkIndex = url.indexOf('#');
+    const hashmarkIndex = url.indexOf("#");
     if (hashmarkIndex !== -1) {
       url = url.slice(0, hashmarkIndex);
     }
 
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
   }
 
   return url;

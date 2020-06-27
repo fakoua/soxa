@@ -4,8 +4,8 @@ import { assertEquals } from "../../test_deps.ts";
 Deno.test({
   name: "test_combineURLs_Format1",
   fn(): void {
-    //@ts-ignore
-    let paramsSerializer = (params) => params;
+    // @ts-ignore
+    const paramsSerializer = (params) => params;
     assertEquals(
       combineURLs("https://www.example.com", "foo/boo?id=1"),
       "https://www.example.com/foo/boo?id=1",

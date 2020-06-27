@@ -1,9 +1,9 @@
-import * as utils from '../utils.ts'
-import { buildURL } from '../helpers/buildURL.ts'
-import { InterceptorManager } from './InterceptorManager.ts'
-import { dispatchRequest } from './dispatchRequest.ts'
-import { mergeConfig } from './mergeConfig.ts'
-import { Config } from './Config.ts'
+import * as utils from "../utils.ts"
+import { buildURL } from "../helpers/buildURL.ts"
+import { InterceptorManager } from "./InterceptorManager.ts"
+import { dispatchRequest } from "./dispatchRequest.ts"
+import { mergeConfig } from "./mergeConfig.ts"
+import { Config } from "./Config.ts"
 
 export class Soxa {
     defaults: any
@@ -21,39 +21,39 @@ export class Soxa {
     // @ts-ignore
     request(config): Promise<any> {
         // Allow for soxa('example/url'[, config]) a la fetch API
-        if (typeof config === 'string') {
+        if (typeof config === "string") {
             config = arguments[1] || {};
             config.url = arguments[0];
         } else {
             config = config || {};
             // Set the defaults
-            if (config.timeout == undefined) {
+            if (config.timeout === undefined) {
                 config.timeout = 0;
             }
 
-            if (config.withCredentials == undefined) {
+            if (config.withCredentials === undefined) {
                 config.withCredentials = false;
             }
 
-            if (config.responseType == undefined) {
-                config.responseType = 'json';
+            if (config.responseType === undefined) {
+                config.responseType = "json";
             }
 
-            if (config.responseEncoding == undefined) {
-                config.responseEncoding = 'utf8';
+            if (config.responseEncoding === undefined) {
+                config.responseEncoding = "utf8";
             }
 
-            if (config.validateStatus == undefined) {
+            if (config.validateStatus === undefined) {
                 config.validateStatus = function (status: number) {
                     return status >= 200 && status < 300; // default
                   };
             }
 
-            if (config.maxRedirects == undefined) {
+            if (config.maxRedirects === undefined) {
                 config.maxRedirects = 5;
             }
 
-            if (config.socketPath == undefined) {
+            if (config.socketPath === undefined) {
                 config.socketPath = null;
             }
         }
@@ -65,10 +65,10 @@ export class Soxa {
         } else if (this.defaults.method) {
             config.method = this.defaults.method.toLowerCase();
         } else {
-            config.method = 'get';
+            config.method = "get";
         }
 
-        let chain = [dispatchRequest, undefined];
+        const chain = [dispatchRequest, undefined];
         let promise = Promise.resolve(config);
 
         // @ts-ignore
@@ -91,7 +91,7 @@ export class Soxa {
     // @ts-ignore
     getUri(config): string {
         config = mergeConfig(this.defaults, config);
-        return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+        return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, "");
     }
 
     private requestURL(url: string, method: string, config?: string|Config): Promise<any> {
@@ -111,34 +111,34 @@ export class Soxa {
 
     // @ts-ignore
     delete(url: string, config?: string|Config): Promise<any> {
-        return this.requestURL(url, 'delete', config)
+        return this.requestURL(url, "delete", config)
     }
 
     // @ts-ignore
     get(url: string, config?: string|Config): Promise<any> {
-        return this.requestURL(url, 'get', config)
+        return this.requestURL(url, "get", config)
     }
 
     // @ts-ignore
     head(url: string, config?: string|Config): Promise<any> {
-        return this.requestURL(url, 'head', config)
+        return this.requestURL(url, "head", config)
     }
 
     // @ts-ignore
     options(url: string, config?: string|Config): Promise<any> {
-        return this.requestURL(url, 'options', config)
+        return this.requestURL(url, "options", config)
     }
 
     post(url: string, data: any, config?: string|Config): Promise<any> {
-        return this.requestData(url, data, 'post', config)
+        return this.requestData(url, data, "post", config)
     }
 
     put(url: string, data: any, config?: string|Config): Promise<any> {
-        return this.requestData(url, data, 'put', config)
+        return this.requestData(url, data, "put", config)
     }
 
     patch(url: string, data: any, config?: string|Config): Promise<any> {
-        return this.requestData(url, data, 'patch', config)
+        return this.requestData(url, data, "patch", config)
     }
 
 }

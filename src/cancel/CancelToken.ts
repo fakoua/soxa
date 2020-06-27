@@ -1,4 +1,4 @@
-import { Cancel } from './Cancel.ts'
+import { Cancel } from "./Cancel.ts"
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
  *
@@ -10,16 +10,16 @@ export class CancelToken {
     // @ts-ignore
     reason: Cancel
     constructor(executor: any) {
-        if (typeof executor !== 'function') {
-            throw new TypeError('executor must be a function.');
+        if (typeof executor !== "function") {
+            throw new TypeError("executor must be a function.");
         }
         // @ts-ignore
-        var resolvePromise;
+        let resolvePromise;
         this.promise = new Promise(function promiseExecutor(resolve) {
             resolvePromise = resolve;
         });
 
-        var token = this;
+        const token = this;
         // @ts-ignore
         executor(function cancel(message) {
             if (token.reason) {
@@ -38,9 +38,9 @@ export class CancelToken {
         }
     }
     source(): object {
-        var cancel;
+        let cancel;
         // @ts-ignore
-        var token = new CancelToken(function executor(c) {
+        const token = new CancelToken(function executor(c) {
             cancel = c;
         });
         return {

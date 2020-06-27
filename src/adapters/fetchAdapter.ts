@@ -1,6 +1,6 @@
-import { settle } from '../core/settle.ts'
-import { buildURL } from '../helpers/buildURL.ts'
-import { buildFullPath } from '../core/buildFullPath.ts'
+import { settle } from "../core/settle.ts"
+import { buildURL } from "../helpers/buildURL.ts"
+import { buildFullPath } from "../core/buildFullPath.ts"
 
 // @ts-ignore
 const fetchAdapter = function (config): Promise<any> {
@@ -13,46 +13,46 @@ const fetchAdapter = function (config): Promise<any> {
     // Upon response settle the Promise
     return new Promise(function(resolve, reject) {
   
-      let fullPath = buildFullPath(config.baseURL, config.url);
+      const fullPath = buildFullPath(config.baseURL, config.url);
 
-      let parsed = new URL(fullPath);
-      //let protocol = parsed.protocol || 'http:'
-      let path = buildURL(parsed.href, config.params, config.paramsSerializer).replace(/^\?/, '')
+      const parsed = new URL(fullPath);
+      // let protocol = parsed.protocol || 'http:'
+      const path = buildURL(parsed.href, config.params, config.paramsSerializer).replace(/^\?/, "")
 
-      let headers = config.headers;
+      const headers = config.headers;
 
       // HTTP basic authentication
-      var auth = undefined;
+      let auth;
       if (config.auth) {
-        var username = config.auth.username || '';
-        var password = config.auth.password || '';
-        auth = username + ':' + password;
+        const username = config.auth.username || "";
+        const password = config.auth.password || "";
+        auth = username + ":" + password;
       }
 
       if (auth) {
         delete headers.Authorization;
       }
       
-      let options = {
+      const options = {
         method: config.method.toUpperCase(),
         body: config.data,
         headers: headers,
       };
       if (auth) {
-        options.headers['Authorization'] =`Basic ${btoa(auth)}`
+        options.headers["Authorization"] = `Basic ${btoa(auth)}`
       }
       
       fetch(path, options)
         .then((res => {
-          let h = {}
-          for (let [key, value] of res.headers) {
+          const h = {}
+          for (const [key, value] of res.headers) {
             // @ts-ignore
             h[key] = value
           }
 
           res.text()  
           .then((data) => {
-            var response = {
+            const response = {
               data: data,
               status: res.status,
               statusText: res.statusText,

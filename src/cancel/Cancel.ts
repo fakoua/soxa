@@ -13,6 +13,6 @@ export class Cancel {
         this.__CANCEL__ = true
     }
     toString(): string {
-        return 'Cancel' + (this.message ? ': ' + this.message : '');
+        return "Cancel" + (this.message ? ": " + this.message : "");
     }
 }

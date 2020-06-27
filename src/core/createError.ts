@@ -1,4 +1,4 @@
-import { enhanceError } from './enhanceError.ts'
+import { enhanceError } from "./enhanceError.ts"
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -11,7 +11,7 @@ import { enhanceError } from './enhanceError.ts'
  * @returns {Error} The created error.
  */
 const createError = function (message: string, config: any, code: any, request: any, response: any) {
-  var error = new Error(message);
+  const error = new Error(message);
   return enhanceError(error, config, code, request, response);
 };
 

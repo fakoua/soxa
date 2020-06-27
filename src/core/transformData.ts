@@ -1,4 +1,4 @@
-import * as utils from '../utils.ts'
+import * as utils from "../utils.ts"
 
 // @ts-ignore
 const transformData = function (data, headers, fns) {

@@ -4,7 +4,7 @@ import { assert } from "../test_deps.ts";
 Deno.test({
   name: "test_utils_IsArray",
   fn(): void {
-    let ar = ["nodejs", "deno"];
+    const ar = ["nodejs", "deno"];
     assert(utils.isArray(ar));
   },
 });
@@ -12,7 +12,7 @@ Deno.test({
 Deno.test({
   name: "test_utils_IsNotArray",
   fn(): void {
-    let notArray = "deno";
+    const notArray = "deno";
     assert(!utils.isArray(notArray));
   },
 });
@@ -20,7 +20,7 @@ Deno.test({
 Deno.test({
   name: "test_utils_IsFormData",
   fn(): void {
-    let data = new FormData();
+    const data = new FormData();
     data.append("deno", "great");
     assert(utils.isFormData(data));
   },
@@ -29,7 +29,7 @@ Deno.test({
 Deno.test({
   name: "test_utils_NotFormData",
   fn(): void {
-    let data = "FormData";
+    const data = "FormData";
     assert(!utils.isFormData(data));
   },
 });

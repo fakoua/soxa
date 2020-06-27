@@ -1,5 +1,5 @@
-import {isAbsoluteURL} from '../helpers/isAbsoluteURL.ts'
-import {combineURLs} from '../helpers/combineURLs.ts'
+import {isAbsoluteURL} from "../helpers/isAbsoluteURL.ts"
+import {combineURLs} from "../helpers/combineURLs.ts"
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,

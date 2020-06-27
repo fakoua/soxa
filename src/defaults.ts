@@ -1,15 +1,15 @@
-import * as utils from './utils.ts'
-import { normalizeHeaderName } from './helpers/normalizeHeaderName.ts'
-import { fetchAdapter } from './adapters/fetchAdapter.ts'
+import * as utils from "./utils.ts"
+import { normalizeHeaderName } from "./helpers/normalizeHeaderName.ts"
+import { fetchAdapter } from "./adapters/fetchAdapter.ts"
 
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
+const DEFAULT_CONTENT_TYPE = {
+  "Content-Type": "application/x-www-form-urlencoded"
 };
 
 // @ts-ignore
 function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers["Content-Type"])) {
+    headers["Content-Type"] = value;
   }
 }
 
@@ -17,10 +17,10 @@ function getDefaultAdapter() {
   return fetchAdapter;
 }
 
-let defaults = {
+const defaults = {
   headers: {
     common: {
-      'Accept': 'application/json, text/plain, */*'
+      "Accept": "application/json, text/plain, */*"
     },
     delete: {},
     get: {},
@@ -33,8 +33,8 @@ let defaults = {
 
   // @ts-ignore
   transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Accept');
-    normalizeHeaderName(headers, 'Content-Type');
+    normalizeHeaderName(headers, "Accept");
+    normalizeHeaderName(headers, "Content-Type");
     if (utils.isFormData(data) ||
       utils.isArrayBuffer(data) ||
       utils.isBuffer(data) ||
@@ -48,11 +48,11 @@ let defaults = {
       return data.buffer;
     }
     if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      setContentTypeIfUnset(headers, "application/x-www-form-urlencoded;charset=utf-8");
       return data.toString();
     }
     if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      setContentTypeIfUnset(headers, "application/json;charset=utf-8");
       return JSON.stringify(data);
     }
     return data;
@@ -61,7 +61,7 @@ let defaults = {
   // @ts-ignore
   transformResponse: [function transformResponse(data) {
     /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
+    if (typeof data === "string") {
       try {
         data = JSON.parse(data);
       } catch (e) { /* Ignore */ }
@@ -75,8 +75,8 @@ let defaults = {
    */
   timeout: 0,
 
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
 
   maxContentLength: -1,
 

@@ -7,7 +7,7 @@
  */
 const combineURLs = function (baseURL: string, relativeURL: string): string {
   return relativeURL
-    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
     : baseURL;
 };
 

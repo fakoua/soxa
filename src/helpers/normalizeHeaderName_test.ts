@@ -5,11 +5,11 @@ Deno.test({
   name: "test_normalizeHeaderName_ContentType",
 
   fn(): void {
-    let headers = {
+    const headers = {
       "content-type": "oCtAl/aNy",
     };
     normalizeHeaderName(headers, "Content-Type");
-    //@ts-ignore
+    // @ts-ignore
     assertEquals(headers["Content-Type"], "oCtAl/aNy");
   },
 });

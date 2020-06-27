@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-import * as utils from '../utils.ts'
-import { transformData } from './transformData.ts'
-import { isCancel } from '../cancel/isCancel.ts'
-import { defaults } from '../defaults.ts'
+import * as utils from "../utils.ts"
+import { transformData } from "./transformData.ts"
+import { isCancel } from "../cancel/isCancel.ts"
+import { defaults } from "../defaults.ts"
 
 // @ts-ignore
 function throwIfCancellationRequested(config): void {
@@ -34,13 +34,13 @@ const dispatchRequest = function (config): Promise<any> {
   );
 
   utils.forEach(
-    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    ["delete", "get", "head", "post", "put", "patch", "common"],
     function cleanHeaderConfig(method: string) {
       delete config.headers[method];
     }
   );
 
-  let adapter = config.adapter || defaults.adapter;
+  const adapter = config.adapter || defaults.adapter;
 
   // @ts-ignore
   return adapter(config).then(function onAdapterResolution(response) {
