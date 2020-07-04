@@ -7,6 +7,18 @@
 
 Promise based HTTP client for deno
 
+## Table of Contents
+
+  - [Features](#features)
+  - [Example](#example)
+  - [Config Defaults](#config-defaults)
+  - [Interceptors](#interceptors)
+  - [Handling Errors](#handling-errors)
+  - [Cancellation](#cancellation)
+  - [Using application/x-www-form-urlencoded format](#using-applicationx-www-form-urlencoded-format)
+  - [Credits](#credits)
+  - [License](#license)
+  
 ## Features
 
 - Make [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) requests from deno
@@ -436,6 +448,13 @@ cancel();
 ## Using application/x-www-form-urlencoded format
 
 By default, soxa serializes JavaScript objects to `JSON`. To send data in the `application/x-www-form-urlencoded` format instead, you can use one of the following options.
+
+```ts
+const params = new URLSearchParams();
+params.append('param1', 'value1');
+params.append('param2', 'value2');
+soxa.post('/foo', params);
+```
 
 ## Credits
 
