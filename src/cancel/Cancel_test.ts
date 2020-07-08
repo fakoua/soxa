@@ -1,5 +1,5 @@
 import { Cancel } from "./Cancel.ts";
-import { assert, assertEquals } from "../../test_deps.ts";
+import { assert } from "../../test_deps.ts";
 
 Deno.test({
   name: "test_Cancel_Instance",
