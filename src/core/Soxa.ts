@@ -3,7 +3,7 @@ import { buildURL } from "../helpers/buildURL.ts"
 import { InterceptorManager } from "./InterceptorManager.ts"
 import { dispatchRequest } from "./dispatchRequest.ts"
 import { mergeConfig } from "./mergeConfig.ts"
-import { Config } from "./Config.ts"
+import type { Config } from "./Config.ts"
 
 export class Soxa {
     defaults: any

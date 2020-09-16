@@ -1,4 +1,4 @@
-import { CancelToken } from "../cancel/CancelToken.ts";
+import type { CancelToken } from "../cancel/CancelToken.ts";
 
 export interface  Config {
     baseURL?: string,
